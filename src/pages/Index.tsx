@@ -50,14 +50,17 @@ const Index = () => {
         {recentSearches.length > 0 && (
           <div className="mt-8">
             <h3 className="text-xl font-bold mb-4">Last 5 Searches</h3>
-            <div className="grid grid-cols-2 gap-4">
-              {recentSearches.slice(0, 5).map((film) => (
-                <FilmCard
-                  key={film.id}
-                  film={film}
-                  onClick={() => handleFilmClick(film)}
-                />
-              ))}
+            <div className="overflow-x-auto pb-4">
+              <div className="flex space-x-4" style={{ minWidth: 'max-content' }}>
+                {recentSearches.slice(0, 5).map((film) => (
+                  <div className="w-48 flex-shrink-0" key={film.id}>
+                    <FilmCard
+                      film={film}
+                      onClick={() => handleFilmClick(film)}
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         )}
@@ -65,14 +68,17 @@ const Index = () => {
         {recentlyAdded.length > 0 && (
           <div className="mt-8">
             <h3 className="text-xl font-bold mb-4">Last 5 Added Films</h3>
-            <div className="grid grid-cols-2 gap-4">
-              {recentlyAdded.slice(0, 5).map((film) => (
-                <FilmCard
-                  key={film.id}
-                  film={film}
-                  onClick={() => handleFilmClick(film)}
-                />
-              ))}
+            <div className="overflow-x-auto pb-4">
+              <div className="flex space-x-4" style={{ minWidth: 'max-content' }}>
+                {recentlyAdded.slice(0, 5).map((film) => (
+                  <div className="w-48 flex-shrink-0" key={film.id}>
+                    <FilmCard
+                      film={film}
+                      onClick={() => handleFilmClick(film)}
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         )}

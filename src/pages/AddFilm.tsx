@@ -74,11 +74,15 @@ const AddFilm = () => {
   return (
     <div className="min-h-screen pb-20 animate-fade-in">
       <div className="max-w-md mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold mb-6">Add film</h1>
+        <h1 className="text-3xl font-bold mb-6">Add</h1>
         
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
+            <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-1">
+              Title <span className="text-red-500">*</span>
+            </label>
             <Input
+              id="title"
               placeholder="Film Title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
@@ -88,7 +92,11 @@ const AddFilm = () => {
           </div>
           
           <div>
+            <label htmlFor="director" className="block text-sm font-medium text-gray-700 mb-1">
+              Director <span className="text-red-500">*</span>
+            </label>
             <Input
+              id="director"
               placeholder="Director"
               value={director}
               onChange={(e) => setDirector(e.target.value)}
@@ -98,7 +106,11 @@ const AddFilm = () => {
           </div>
           
           <div>
+            <label htmlFor="actor" className="block text-sm font-medium text-gray-700 mb-1">
+              Actor
+            </label>
             <Input
+              id="actor"
               placeholder="Actor"
               value={actor}
               onChange={(e) => setActor(e.target.value)}
@@ -108,7 +120,11 @@ const AddFilm = () => {
           
           <div className="grid grid-cols-2 gap-4">
             <div>
+              <label htmlFor="genre" className="block text-sm font-medium text-gray-700 mb-1">
+                Genre
+              </label>
               <Input
+                id="genre"
                 placeholder="Genre"
                 value={genre}
                 onChange={(e) => setGenre(e.target.value)}
@@ -116,7 +132,11 @@ const AddFilm = () => {
               />
             </div>
             <div>
+              <label htmlFor="idNumber" className="block text-sm font-medium text-gray-700 mb-1">
+                ID Number <span className="text-red-500">*</span>
+              </label>
               <Input
+                id="idNumber"
                 placeholder="ID number"
                 value={idNumber}
                 onChange={(e) => setIdNumber(e.target.value)}
@@ -128,7 +148,11 @@ const AddFilm = () => {
           
           <div className="grid grid-cols-2 gap-4">
             <div>
+              <label htmlFor="tags" className="block text-sm font-medium text-gray-700 mb-1">
+                Tags
+              </label>
               <Input
+                id="tags"
                 placeholder="Tags (comma separated)"
                 value={tags}
                 onChange={(e) => setTags(e.target.value)}
@@ -136,7 +160,11 @@ const AddFilm = () => {
               />
             </div>
             <div>
+              <label htmlFor="year" className="block text-sm font-medium text-gray-700 mb-1">
+                Year
+              </label>
               <Input
+                id="year"
                 placeholder="Year"
                 value={year}
                 onChange={(e) => setYear(e.target.value)}
@@ -153,7 +181,11 @@ const AddFilm = () => {
           </div>
           
           <div>
+            <label htmlFor="imageUrl" className="block text-sm font-medium text-gray-700 mb-1">
+              Image URL
+            </label>
             <Input
+              id="imageUrl"
               placeholder="Upload image via URL"
               value={imageUrl}
               onChange={(e) => setImageUrl(e.target.value)}
@@ -164,7 +196,7 @@ const AddFilm = () => {
           <div className="grid grid-cols-2 gap-4 pt-4">
             <Button
               type="submit"
-              className="w-full py-6 bg-coral hover:bg-coral/90 text-white text-lg rounded-[10px] font-medium"
+              className="w-full py-6 bg-[#84cc16] hover:bg-[#84cc16]/90 text-white text-lg rounded-[10px] font-medium"
             >
               Add
             </Button>
