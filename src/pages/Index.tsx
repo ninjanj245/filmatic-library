@@ -1,82 +1,100 @@
 
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import SearchBar from '@/components/SearchBar';
+import { useFilms } from '@/context/FilmContext';
+import { Film } from '@/types/film';
 import Navigation from '@/components/Navigation';
 import FilmCard from '@/components/FilmCard';
 import FilmModal from '@/components/FilmModal';
-import { useFilms } from '@/context/FilmContext';
-import { Film } from '@/types/film';
+import SearchBar from '@/components/SearchBar';
+import { Button } from '@/components/ui/button';
+import DropboxSync from '@/components/DropboxSync';
 
 const Index = () => {
   const navigate = useNavigate();
-  const { recentSearches, recentlyAdded } = useFilms();
+  const { films, recentSearches, recentlyAdded } = useFilms();
   const [selectedFilm, setSelectedFilm] = useState<Film | null>(null);
-  
+
+  const handleFilmClick = (film: Film) => {
+    setSelectedFilm(film);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedFilm(null);
+  };
+
   return (
-    <div className="min-h-screen pb-20 px-4">
-      <div className="py-8">
-        <div className="grid grid-cols-2 gap-4 mb-6">
-          <button
+    <div className="min-h-screen pb-20 animate-fade-in">
+      <div className="max-w-md mx-auto px-4 py-8">
+        <div className="flex justify-between items-center mb-6">
+          <Button
             onClick={() => navigate('/add')}
-            className="bg-black text-white py-4 rounded-2xl font-medium text-lg transition-transform duration-300 hover:scale-[1.02] active:scale-[0.98]"
+            className="bg-coral hover:bg-coral/90 text-white rounded-[10px] px-6 py-3"
           >
-            Add film
-          </button>
-          <button
+            Add Film
+          </Button>
+          <Button
             onClick={() => navigate('/library')}
-            className="bg-white text-black border border-black py-4 rounded-2xl font-medium text-lg transition-transform duration-300 hover:scale-[1.02] active:scale-[0.98]"
+            variant="outline"
+            className="border-gray-300 text-gray-700 rounded-[10px] px-6 py-3"
           >
             View Library
-          </button>
+          </Button>
         </div>
-        
-        <div className="mb-8">
-          <SearchBar />
+
+        <div className="flex justify-between items-center mb-4">
+          <h3 className="text-xl font-bold">Search</h3>
+          <DropboxSync />
         </div>
-        
+
+        <SearchBar className="mb-6" />
+
         {recentSearches.length > 0 && (
-          <div className="mb-8">
-            <h2 className="text-2xl font-bold mb-4">Last 5 searches</h2>
+          <div className="mt-8">
+            <h3 className="text-xl font-bold mb-4">Last 5 Searches</h3>
             <div className="grid grid-cols-2 gap-4">
-              {recentSearches.map(film => (
-                <FilmCard 
-                  key={film.id} 
-                  film={film} 
-                  variant="search"
-                  onClick={() => setSelectedFilm(film)}
+              {recentSearches.slice(0, 5).map((film) => (
+                <FilmCard
+                  key={film.id}
+                  film={film}
+                  onClick={() => handleFilmClick(film)}
                 />
               ))}
             </div>
           </div>
         )}
-        
+
         {recentlyAdded.length > 0 && (
-          <div>
-            <h2 className="text-2xl font-bold mb-4">Last 5 added</h2>
+          <div className="mt-8">
+            <h3 className="text-xl font-bold mb-4">Last 5 Added Films</h3>
             <div className="grid grid-cols-2 gap-4">
-              {recentlyAdded.map(film => (
-                <FilmCard 
-                  key={film.id} 
-                  film={film} 
-                  variant="recent"
-                  onClick={() => setSelectedFilm(film)}
+              {recentlyAdded.slice(0, 5).map((film) => (
+                <FilmCard
+                  key={film.id}
+                  film={film}
+                  onClick={() => handleFilmClick(film)}
                 />
               ))}
             </div>
+          </div>
+        )}
+
+        {films.length === 0 && (
+          <div className="text-center mt-8 p-6 border border-gray-200 rounded-[10px]">
+            <p className="text-gray-500">Your film library is empty. Add your first film!</p>
           </div>
         )}
       </div>
-      
-      <Navigation />
-      
+
       {selectedFilm && (
-        <FilmModal 
-          film={selectedFilm} 
-          isOpen={!!selectedFilm} 
-          onClose={() => setSelectedFilm(null)} 
+        <FilmModal
+          film={selectedFilm}
+          isOpen={!!selectedFilm}
+          onClose={handleCloseModal}
         />
       )}
+
+      <Navigation />
     </div>
   );
 };

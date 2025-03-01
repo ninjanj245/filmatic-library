@@ -33,7 +33,7 @@ const FilmModal: React.FC<FilmModalProps> = ({ film, isOpen, onClose }) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="sm:max-w-md rounded-2xl">
+      <DialogContent className="sm:max-w-md rounded-[10px]">
         <div className="flex justify-between items-start">
           <h2 className="text-2xl font-bold">{film.title}</h2>
           <button 
@@ -44,7 +44,7 @@ const FilmModal: React.FC<FilmModalProps> = ({ film, isOpen, onClose }) => {
           </button>
         </div>
 
-        <div className="rounded-xl overflow-hidden mt-2">
+        <div className="rounded-[10px] overflow-hidden mt-2">
           <img
             src={imageError || !film.image ? placeholderImage : film.image}
             alt={film.title}
@@ -90,7 +90,7 @@ const FilmModal: React.FC<FilmModalProps> = ({ film, isOpen, onClose }) => {
               {film.tags.map((tag, index) => (
                 <span 
                   key={index}
-                  className="bg-gray-100 px-2 py-1 rounded-full text-sm"
+                  className="bg-gray-100 px-2 py-1 rounded-[10px] text-sm"
                 >
                   {tag}
                 </span>
@@ -102,7 +102,7 @@ const FilmModal: React.FC<FilmModalProps> = ({ film, isOpen, onClose }) => {
         <DialogFooter className="flex sm:justify-between gap-3 mt-4">
           <Button 
             variant="outline" 
-            className="border-gray-300 hover:bg-gray-100 text-gray-700"
+            className="border-gray-300 hover:bg-gray-100 text-gray-700 rounded-[10px]"
             onClick={onClose}
           >
             Cancel
@@ -110,7 +110,7 @@ const FilmModal: React.FC<FilmModalProps> = ({ film, isOpen, onClose }) => {
           <div className="flex gap-2">
             <Button 
               variant="outline" 
-              className="border-coral hover:bg-coral/10 text-coral"
+              className="border-coral hover:bg-coral/10 text-coral rounded-[10px]"
               onClick={handleEdit}
             >
               <Edit className="w-4 h-4 mr-2" />
@@ -119,6 +119,7 @@ const FilmModal: React.FC<FilmModalProps> = ({ film, isOpen, onClose }) => {
             <Button 
               variant="destructive"
               onClick={handleDelete}
+              className="rounded-[10px]"
             >
               <Trash2 className="w-4 h-4 mr-2" />
               Delete

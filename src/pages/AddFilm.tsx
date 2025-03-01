@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
 import { Film } from '@/types/film';
+import { CheckCircle } from 'lucide-react';
 
 const AddFilm = () => {
   const navigate = useNavigate();
@@ -20,6 +21,7 @@ const AddFilm = () => {
   const [year, setYear] = useState('');
   const [tags, setTags] = useState('');
   const [imageUrl, setImageUrl] = useState('');
+  const [showSuccess, setShowSuccess] = useState(false);
   
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -41,8 +43,33 @@ const AddFilm = () => {
     };
     
     addFilm(newFilm);
-    navigate('/');
+    setShowSuccess(true);
+    
+    // Reset form for next entry
+    setTimeout(() => {
+      setShowSuccess(false);
+      navigate('/');
+    }, 2000);
   };
+  
+  if (showSuccess) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center animate-fade-in">
+        <div className="text-center p-8">
+          <CheckCircle className="w-20 h-20 text-coral mx-auto mb-4" />
+          <h2 className="text-2xl font-bold mb-2">Success!</h2>
+          <p className="text-gray-600 mb-4">Film added to your library</p>
+          <Button
+            onClick={() => navigate('/')}
+            className="bg-coral hover:bg-coral/90 text-white text-lg rounded-[10px] font-medium px-8 py-4"
+          >
+            Return to Home
+          </Button>
+        </div>
+        <Navigation />
+      </div>
+    );
+  }
   
   return (
     <div className="min-h-screen pb-20 animate-fade-in">
@@ -55,7 +82,7 @@ const AddFilm = () => {
               placeholder="Film Title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className="w-full py-4 px-4 rounded-full border border-gray-300"
+              className="w-full py-4 px-4 rounded-[10px] border border-gray-300"
               required
             />
           </div>
@@ -65,7 +92,7 @@ const AddFilm = () => {
               placeholder="Director"
               value={director}
               onChange={(e) => setDirector(e.target.value)}
-              className="w-full py-4 px-4 rounded-full border border-gray-300"
+              className="w-full py-4 px-4 rounded-[10px] border border-gray-300"
               required
             />
           </div>
@@ -75,7 +102,7 @@ const AddFilm = () => {
               placeholder="Actor"
               value={actor}
               onChange={(e) => setActor(e.target.value)}
-              className="w-full py-4 px-4 rounded-full border border-gray-300"
+              className="w-full py-4 px-4 rounded-[10px] border border-gray-300"
             />
           </div>
           
@@ -85,7 +112,7 @@ const AddFilm = () => {
                 placeholder="Genre"
                 value={genre}
                 onChange={(e) => setGenre(e.target.value)}
-                className="w-full py-4 px-4 rounded-full border border-gray-300"
+                className="w-full py-4 px-4 rounded-[10px] border border-gray-300"
               />
             </div>
             <div>
@@ -93,7 +120,7 @@ const AddFilm = () => {
                 placeholder="ID number"
                 value={idNumber}
                 onChange={(e) => setIdNumber(e.target.value)}
-                className="w-full py-4 px-4 rounded-full border border-gray-300"
+                className="w-full py-4 px-4 rounded-[10px] border border-gray-300"
                 required
               />
             </div>
@@ -105,7 +132,7 @@ const AddFilm = () => {
                 placeholder="Tags (comma separated)"
                 value={tags}
                 onChange={(e) => setTags(e.target.value)}
-                className="w-full py-4 px-4 rounded-full border border-gray-300"
+                className="w-full py-4 px-4 rounded-[10px] border border-gray-300"
               />
             </div>
             <div>
@@ -113,7 +140,7 @@ const AddFilm = () => {
                 placeholder="Year"
                 value={year}
                 onChange={(e) => setYear(e.target.value)}
-                className="w-full py-4 px-4 rounded-full border border-gray-300"
+                className="w-full py-4 px-4 rounded-[10px] border border-gray-300"
                 type="number"
                 min="1888"
                 max={new Date().getFullYear().toString()}
@@ -121,7 +148,7 @@ const AddFilm = () => {
             </div>
           </div>
           
-          <div className="border border-gray-300 rounded-xl p-4 h-40 flex items-center justify-center">
+          <div className="border border-gray-300 rounded-[10px] p-4 h-40 flex items-center justify-center">
             <p className="text-gray-500 text-center">Drag & drop for upload</p>
           </div>
           
@@ -130,22 +157,22 @@ const AddFilm = () => {
               placeholder="Upload image via URL"
               value={imageUrl}
               onChange={(e) => setImageUrl(e.target.value)}
-              className="w-full py-4 px-4 rounded-full border border-gray-300"
+              className="w-full py-4 px-4 rounded-[10px] border border-gray-300"
             />
           </div>
           
           <div className="grid grid-cols-2 gap-4 pt-4">
             <Button
               type="submit"
-              className="w-full py-6 bg-coral hover:bg-coral/90 text-white text-lg rounded-xl font-medium"
+              className="w-full py-6 bg-coral hover:bg-coral/90 text-white text-lg rounded-[10px] font-medium"
             >
-              Add film
+              Add
             </Button>
             <Button
               type="button"
               variant="outline"
               onClick={() => navigate('/')}
-              className="w-full py-6 bg-coral text-white text-lg rounded-xl font-medium border-none"
+              className="w-full py-6 bg-coral text-white text-lg rounded-[10px] font-medium border-none"
             >
               Cancel
             </Button>

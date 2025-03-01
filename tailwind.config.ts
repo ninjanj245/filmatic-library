@@ -70,11 +70,11 @@ export default {
 				lightGray: "#C8C8C9",
 			},
 			borderRadius: {
-				lg: 'var(--radius)',
-				md: 'calc(var(--radius) - 2px)',
-				sm: 'calc(var(--radius) - 4px)',
-				xl: '1rem',
-				'2xl': '1.5rem',
+				lg: '10px', // Changed to 10px
+				md: '8px', // Adjusted to fit the new lg radius
+				sm: '6px', // Adjusted to fit the new lg radius
+				xl: '10px', // Changed to 10px
+				'2xl': '10px', // Changed to 10px
 			},
 			keyframes: {
 				'accordion-down': {
