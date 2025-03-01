@@ -8,7 +8,6 @@ import FilmCard from '@/components/FilmCard';
 import FilmModal from '@/components/FilmModal';
 import SearchBar from '@/components/SearchBar';
 import { Button } from '@/components/ui/button';
-import DropboxSync from '@/components/DropboxSync';
 
 const Index = () => {
   const navigate = useNavigate();
@@ -42,9 +41,8 @@ const Index = () => {
           </Button>
         </div>
 
-        <div className="flex justify-between items-center mb-4">
+        <div className="mb-4">
           <h3 className="text-xl font-bold">Search</h3>
-          <DropboxSync />
         </div>
 
         <SearchBar className="mb-6" />

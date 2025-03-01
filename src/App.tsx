@@ -13,7 +13,6 @@ import Library from "./pages/Library";
 import Search from "./pages/Search";
 import EditFilm from "./pages/EditFilm";
 import NotFound from "./pages/NotFound";
-import DropboxAuthCallback from "./pages/DropboxAuthCallback";
 
 const queryClient = new QueryClient();
 
@@ -30,7 +29,6 @@ const App = () => (
             <Route path="/library" element={<Library />} />
             <Route path="/search" element={<Search />} />
             <Route path="/edit/:id" element={<EditFilm />} />
-            <Route path="/auth" element={<DropboxAuthCallback />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
