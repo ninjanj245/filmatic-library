@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Film } from '@/types/film';
 import { useFilms } from '@/context/FilmContext';
-import { X, Edit, Trash2 } from 'lucide-react';
+import { Edit, Trash2 } from 'lucide-react';
 import placeholderImage from '/placeholder.svg';
 import { Dialog, DialogContent, DialogFooter } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
@@ -36,12 +36,7 @@ const FilmModal: React.FC<FilmModalProps> = ({ film, isOpen, onClose }) => {
       <DialogContent className="sm:max-w-md rounded-[10px]">
         <div className="flex justify-between items-start">
           <h2 className="text-2xl font-bold">{film.title}</h2>
-          <button 
-            onClick={onClose}
-            className="rounded-full p-1 hover:bg-gray-100 transition-colors"
-          >
-            <X className="w-5 h-5" />
-          </button>
+          {/* Removed the duplicate X button here */}
         </div>
 
         <div className="rounded-[10px] overflow-hidden mt-2">
