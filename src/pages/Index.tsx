@@ -2,17 +2,26 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useFilms } from '@/context/FilmContext';
-import { Film } from '@/types/film';
+import { Film, SortOption } from '@/types/film';
 import Navigation from '@/components/Navigation';
 import FilmCard from '@/components/FilmCard';
 import FilmModal from '@/components/FilmModal';
 import SearchBar from '@/components/SearchBar';
 import { Button } from '@/components/ui/button';
+import { ChevronDown } from 'lucide-react';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const Index = () => {
   const navigate = useNavigate();
   const { films, recentSearches, recentlyAdded } = useFilms();
   const [selectedFilm, setSelectedFilm] = useState<Film | null>(null);
+  const [sortOption, setSortOption] = useState<SortOption>('alphabetically');
 
   const handleFilmClick = (film: Film) => {
     setSelectedFilm(film);
@@ -28,20 +37,47 @@ const Index = () => {
         <div className="flex justify-between items-center mb-6">
           <Button
             onClick={() => navigate('/add')}
-            className="bg-coral hover:bg-coral/90 text-white rounded-[10px] px-6 py-3"
+            className="bg-coral hover:bg-coral/90 text-white rounded-[10px] px-6 py-3 w-[48%]"
           >
             Add Film
           </Button>
           <Button
             onClick={() => navigate('/library')}
             variant="outline"
-            className="border-gray-300 text-gray-700 rounded-[10px] px-6 py-3"
+            className="border-gray-300 text-gray-700 rounded-[10px] px-6 py-3 w-[48%]"
           >
             View Library
           </Button>
         </div>
 
-        <SearchBar className="mb-6" />
+        <SearchBar className="mb-4" />
+        
+        <div className="flex justify-end mb-6">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline" className="border-gray-300 text-gray-700 rounded-[10px] flex items-center gap-1">
+                Filter by: {sortOption === 'alphabetically' ? 'Title' : 
+                           sortOption === 'director' ? 'Director' : 
+                           sortOption === 'actor' ? 'Actor' : 
+                           sortOption === 'genre' ? 'Genre' : 
+                           sortOption === 'year' ? 'Year' : 
+                           sortOption === 'number' ? 'ID Number' : 'Tags'}
+                <ChevronDown className="h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="bg-white rounded-[10px] border border-gray-200 shadow-md w-56">
+              <DropdownMenuRadioGroup value={sortOption} onValueChange={(value) => setSortOption(value as SortOption)}>
+                <DropdownMenuRadioItem value="alphabetically">Title</DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="director">Director</DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="actor">Actor</DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="genre">Genre</DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="year">Year</DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="number">ID Number</DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="tags">Tags</DropdownMenuRadioItem>
+              </DropdownMenuRadioGroup>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
 
         {recentSearches.length > 0 && (
           <div className="mt-8">

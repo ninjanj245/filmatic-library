@@ -99,18 +99,11 @@ const FilmModal: React.FC<FilmModalProps> = ({ film, isOpen, onClose }) => {
           )}
         </div>
 
-        <DialogFooter className="flex sm:justify-between gap-3 mt-4">
-          <Button 
-            variant="outline" 
-            className="border-gray-300 hover:bg-gray-100 text-gray-700 rounded-[10px]"
-            onClick={onClose}
-          >
-            Cancel
-          </Button>
-          <div className="flex gap-2">
+        <DialogFooter className="flex justify-between gap-3 mt-4">
+          <div className="flex gap-2 w-full">
             <Button 
               variant="outline" 
-              className="border-coral hover:bg-coral/10 text-coral rounded-[10px]"
+              className="border-coral hover:bg-coral/10 text-coral rounded-[10px] w-1/2"
               onClick={handleEdit}
             >
               <Edit className="w-4 h-4 mr-2" />
@@ -119,7 +112,7 @@ const FilmModal: React.FC<FilmModalProps> = ({ film, isOpen, onClose }) => {
             <Button 
               variant="destructive"
               onClick={handleDelete}
-              className="rounded-[10px]"
+              className="rounded-[10px] w-1/2"
             >
               <Trash2 className="w-4 h-4 mr-2" />
               Delete
