@@ -20,7 +20,7 @@ const FilmCard: React.FC<FilmCardProps> = ({
   const bgColor = variant === 'search' 
     ? 'bg-softPink' 
     : variant === 'recent' 
-      ? 'bg-softGreen' 
+      ? 'bg-coral' 
       : 'bg-white';
 
   return (

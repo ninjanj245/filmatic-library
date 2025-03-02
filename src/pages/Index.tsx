@@ -93,17 +93,16 @@ const Index = () => {
         {recentSearches.length > 0 && (
           <div className="mt-8">
             <h3 className="text-xl font-bold mb-4">Last 5 Searches</h3>
-            <div className="overflow-x-auto pb-4">
-              <div className="flex space-x-4" style={{ minWidth: 'max-content' }}>
-                {recentSearches.slice(0, 5).map((film) => (
-                  <div className="w-48 flex-shrink-0" key={film.id}>
-                    <FilmCard
-                      film={film}
-                      onClick={() => handleFilmClick(film)}
-                    />
-                  </div>
-                ))}
-              </div>
+            <div className="grid grid-cols-2 gap-4">
+              {recentSearches.slice(0, 5).map((film) => (
+                <div key={film.id}>
+                  <FilmCard
+                    film={film}
+                    onClick={() => handleFilmClick(film)}
+                    variant="recent"
+                  />
+                </div>
+              ))}
             </div>
           </div>
         )}
