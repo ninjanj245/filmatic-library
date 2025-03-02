@@ -19,16 +19,27 @@ import {
 
 const Index = () => {
   const navigate = useNavigate();
-  const { films, recentSearches, recentlyAdded } = useFilms();
+  const { films, recentSearches, recentlyAdded, searchFilms, addToRecentSearches } = useFilms();
   const [selectedFilm, setSelectedFilm] = useState<Film | null>(null);
   const [sortOption, setSortOption] = useState<SortOption>('alphabetically');
 
   const handleFilmClick = (film: Film) => {
     setSelectedFilm(film);
+    // Add to recent searches when a film is clicked
+    addToRecentSearches(film);
   };
 
   const handleCloseModal = () => {
     setSelectedFilm(null);
+  };
+
+  const handleSearch = (query: string) => {
+    const results = searchFilms(query, sortOption);
+    if (results.length > 0) {
+      navigate(`/search?q=${encodeURIComponent(query)}&sort=${sortOption}`);
+    } else {
+      navigate(`/search?q=${encodeURIComponent(query)}&sort=${sortOption}`);
+    }
   };
 
   return (
@@ -50,7 +61,7 @@ const Index = () => {
           </Button>
         </div>
 
-        <SearchBar className="mb-4" />
+        <SearchBar className="mb-4" onSearch={handleSearch} />
         
         <div className="flex justify-end mb-6">
           <DropdownMenu>
